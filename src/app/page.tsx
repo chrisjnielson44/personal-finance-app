@@ -57,7 +57,7 @@ export default function Home() {
             </div>
             <SignIn />
             <p className="px-8 text-center text-sm text-muted-foreground">
-              Don't have an accout?{" "}
+              Don&apod;t have an accout?{" "}
               <Link
                 href="/sign-up"
                 className="underline underline-offset-4 hover:text-primary"
