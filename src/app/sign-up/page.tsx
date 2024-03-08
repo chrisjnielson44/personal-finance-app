@@ -2,8 +2,8 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { SignIn } from "./SignIn";
-import { ModeToggle } from "./dashboard/components/DarkModeToggle";
+import { SignUp } from "./SignUp";
+import { ModeToggle } from "../dashboard/components/DarkModeToggle";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 
 export default function Home() {
@@ -52,17 +52,17 @@ export default function Home() {
             </div>
             <div className="flex flex-col space-y-2 text-center">
               <h1 className="text-2xl font-semibold tracking-tight">
-                Sign In
+                Create an Account
               </h1>
             </div>
-            <SignIn />
+            <SignUp />
             <p className="px-8 text-center text-sm text-muted-foreground">
-              Don't have an accout?{" "}
+              Already have an account?{" "}
               <Link
-                href="/sign-up"
+                href="/"
                 className="underline underline-offset-4 hover:text-primary"
               >
-                Sign Up
+                Sign In
               </Link>
             </p>
           </div>
