@@ -39,6 +39,7 @@ import { PlusSmallIcon } from "@heroicons/react/24/outline"
 import { DashboardNav } from "./components/dashboard-nav"
 import { FullNav } from "./components/nav/full-nav"
 import { AddWidget } from "./components/addwidget"
+import SignOutButton from "./components/signout"
 
 import  Progress  from "./components/porfoliosucess"
 
@@ -52,7 +53,7 @@ export default async function DashboardPage() {
         <>
             <div className="flex-col md:flex">
                 <FullNav />
-                <div className="flex-1 space-y-4 p-8 pt-6">
+                <div className="flex-1 space-y-4 p-8 pt-4">
                     {/* <Tabs defaultValue="trade" className="space-y-4">
                         <TabsList className="grid sm:width-full lg:w-fit grid-cols-2">
                             <TabsTrigger value="trade">Trade</TabsTrigger>
@@ -63,15 +64,14 @@ export default async function DashboardPage() {
                     {/* <DashboardNav/> */}
 
                     <div className="flex items-center justify-between space-y-2">
-                        <h2 className="text-3xl font-bold tracking-tight">Advisor Dashboard</h2>
-
+                        <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
                         <div className="flex space-x-2">
                             {/* <Button variant="outline"><PlusIcon className="h-4 w-4 fill-currentColor" /></Button> */}
                             {/* <Button variant={"outline"} className=""><Plus className="h-4 w-4"></Plus>Add Widget</Button> */}
                             <AddWidget />
                             <SelectDashboard />
                         </div>
-
+                        <SignOutButton/>
                     </div>
                     <Tabs defaultValue="overview" className="space-y-4">
                         <TabsContent value="overview" className="space-y-4">

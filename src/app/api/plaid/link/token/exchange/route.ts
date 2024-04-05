@@ -1,25 +1,20 @@
 import { withIronSessionApiRoute } from 'iron-session/next';
-import { plaidClient, sessionOptions } from '@/app/lib/plaid';
+import { plaidClient, sessionOptions } from "@/app/lib/plaid";
+import { NextResponse } from 'next/server';
 
-export default withIronSessionApiRoute(exchangePublicToken, sessionOptions);
+export async function POST(request: Request) {
+   // Ensure request.body is not null
+   if (!request.body) {
+      throw new Error('Request body is missing');
+   }
 
-async function exchangePublicToken(req, res) {
-  const exchangeResponse = await plaidClient.itemPublicTokenExchange({
-    public_token: req.body.public_token,
-  });
+   // Parse the request body as JSON
+   const body = await request.json();
 
-  req.session.access_token = exchangeResponse.data.access_token;
-  await req.session.save();
-  res.send({ ok: true });
-}
+   // Now you can safely access public_token
+   const exchangeResponse = await plaidClient.itemPublicTokenExchange({
+      public_token: body.public_token,
+   });
 
-
-async function POST (request: Request) {
-    const req = await plaidClient.itemPublicTokenExchange({
-        public_token: req.body.public_token,
-      });
-    
-      req.session.access_token = req.data.access_token;
-      await req.session.save();
-      res.send({ ok: true });
+   return NextResponse.json(exchangeResponse.data);
 }

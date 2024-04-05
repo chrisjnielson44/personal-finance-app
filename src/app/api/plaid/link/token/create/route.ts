@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import { CountryCode, Products } from 'plaid';
 
 
-export default async function GET(request: Request) {
+export async function POST(request: Request) {
   const tokenResponse = await plaidClient.linkTokenCreate({
     user: { client_user_id: process.env.PLAID_CLIENT_ID || 'default_client_id' },
     client_name: "Paywind Personal Finance",
