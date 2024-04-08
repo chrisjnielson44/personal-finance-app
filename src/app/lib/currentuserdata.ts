@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../api/auth/[...nextauth]/authOptions';
+import { authOptions } from './authOptions';
 import PlaidLink from '../dashboard/plaid-test/linkbutton';
 
 export const prisma = new PrismaClient().$extends(withAccelerate());

@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import { NextResponse } from 'next/server';
 
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
+import { authOptions } from "@/app/lib/authOptions";
 
 
 const prisma = new PrismaClient().$extends(withAccelerate())
