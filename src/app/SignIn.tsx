@@ -11,7 +11,6 @@ import { Label } from "@/components/ui/label";
 
 const SignInSchema = z.object({
     email: z.string().email(),
-    password: z.string().min(8),
 });
 
 export default async function SignIn() {
@@ -51,8 +50,8 @@ export default async function SignIn() {
 
     return (
         <div>
-            <div><Toaster /></div>
-            <div className="flex  flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+            <div><Toaster/></div>
+            <div className="flex  flex-1 flex-col justify-center">
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                     <form className="space-y-6" onSubmit={handleSubmit}>
                         <div>
@@ -66,7 +65,6 @@ export default async function SignIn() {
                                     type="email"
                                     autoComplete="email"
                                     required
-                                    className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-black dark:text-white shadow-sm ring-1 ring-inset ring-gray-500 focus:ring-2 focus:ring-inset focus:ring-green-500 sm:text-sm sm:leading-6"
                                 />
                             </div>
                         </div>
@@ -75,11 +73,11 @@ export default async function SignIn() {
                                 <Label htmlFor="password" className="block text-sm font-bold leading-6 dark:text-white text-green-500">
                                     Password
                                 </Label>
-                                <div className="text-sm">
+                                {/* <div className="text-sm">
                                     <a href="#" className="font-semibold text-black dark:text-white hover:text-red-600">
                                         Forgot password?
                                     </a>
-                                </div>
+                                </div> */}
                             </div>
                             <div className="mt-2">
                                 <Input
@@ -88,7 +86,6 @@ export default async function SignIn() {
                                     type="password"
                                     autoComplete="current-password"
                                     required
-                                    className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-black dark:text-white shadow-sm ring-1 ring-inset ring-gray-500 focus:ring-2 focus:ring-inset focus:ring-green-500 sm:text-sm sm:leading-6"
                                 />
                             </div>
                         </div>

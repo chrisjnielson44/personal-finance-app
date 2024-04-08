@@ -1,4 +1,5 @@
 'use client'
+import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect, useCallback } from 'react';
 import { usePlaidLink } from 'react-plaid-link';
@@ -18,8 +19,9 @@ export default function PlaidLink() {
     createLinkToken();
 
   }, []);
-
   const onSuccess = useCallback(async (publicToken: any) => {
+
+    // First, exchange the public token for an access token
     await fetch('/api/plaid/link/token/exchange', {
       method: 'POST',
       headers: {
@@ -27,9 +29,10 @@ export default function PlaidLink() {
       },
       body: JSON.stringify({ public_token: publicToken }),
     });
+
+    // Redirect to dashboard after success
     router.push('/dashboard');
-    console.log('publicToken', publicToken);
-  }, []);
+  }, [router]);
 
   const { open, ready } = usePlaidLink({
     token,
@@ -37,8 +40,12 @@ export default function PlaidLink() {
   });
 
   return (
-    <button onClick={() => open()} disabled={!ready}>
-      <strong>Link account</strong>
-    </button>
+    <div>
+      <Button onClick={() => open()} disabled={!ready} className='text-white'>
+        Link Account
+      </Button>
+    </div>
+
   );
 }
+

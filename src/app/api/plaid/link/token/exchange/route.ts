@@ -1,6 +1,7 @@
-import { withIronSessionApiRoute } from 'iron-session/next';
-import { plaidClient, sessionOptions } from "@/app/lib/plaid";
+import { plaidClient } from "@/app/lib/plaid";
 import { NextResponse } from 'next/server';
+import { prisma } from '@/app/lib/currentuserdata';
+import { getUserData } from '@/app/lib/currentuserdata';
 
 export async function POST(request: Request) {
    // Ensure request.body is not null
@@ -16,5 +17,17 @@ export async function POST(request: Request) {
       public_token: body.public_token,
    });
 
-   return NextResponse.json(exchangeResponse.data);
+   const user = await getUserData();
+
+   if (!user) {
+      throw new Error('User not found');
+   }
+
+   const uploadAccessToken = await prisma.user.update({
+      where: { id: user.id },
+      data: { plaidExchangeToken: exchangeResponse.data.access_token },
+   });
+
+   return NextResponse.json(uploadAccessToken, { status: 200 });
 }
+

@@ -18,8 +18,8 @@ const plaidClient = new PlaidApi(
 );
 
 const sessionOptions = {
-  cookieName: 'myapp_cookiename',
-  password: 'complex_password_at_least_32_characters_long',
+  cookieName: 'Plaid-Public-Token',
+  password: process.env.COOKIE_SECRET,
   // secure: true should be used in production (HTTPS) but can't be used in development (HTTP)
   cookieOptions: {
     secure: process.env.NODE_ENV === 'production',

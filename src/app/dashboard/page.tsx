@@ -71,7 +71,6 @@ export default async function DashboardPage() {
                             <AddWidget />
                             <SelectDashboard />
                         </div>
-                        <SignOutButton/>
                     </div>
                     <Tabs defaultValue="overview" className="space-y-4">
                         <TabsContent value="overview" className="space-y-4">

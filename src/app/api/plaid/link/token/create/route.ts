@@ -12,6 +12,7 @@ export async function POST(request: Request) {
     country_codes: [CountryCode.Us],
     redirect_uri: process.env.PLAID_SANDBOX_REDIRECT_URI,
   });
+  console.log((NextResponse.json(tokenResponse.data)))
 
   return NextResponse.json(tokenResponse.data);
 }

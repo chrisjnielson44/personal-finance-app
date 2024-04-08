@@ -15,35 +15,28 @@ import {
 } from "@/components/ui/dropdown-menu"
 import Link from "next/link"
 import React from "react";
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
+import SignOutButton from "../signout";
+import { getUserData } from "@/app/lib/currentuserdata";
 
 const prisma = new PrismaClient().$extends(withAccelerate())
 
 
 export async function UserNav() {
-  const session = await getServerSession(authOptions);
+  const data = await getUserData();
 
-    async function fetchUserEmail() {
-      if (session) {
-        const user = await prisma.user.findUnique({
-          where: {
-            id: session.user.id,
-          },
-        });
-        return user.email;
-    }
-
+  // first letter of first name and last name
+  const initials = (`${data?.firstName.charAt(0)}${data?.lastName.charAt(0)}`)
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-8 w-8">
-            <AvatarFallback className="bg-gray-300 dark:text-black"></AvatarFallback>
+            <AvatarFallback className="bg-gray-300 dark:text-black">{`${initials}`}
+            </AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
@@ -51,8 +44,11 @@ export async function UserNav() {
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
             <p className="text-sm font-medium leading-none"></p>
-            {session?.user?.email || "Loading..."}
             <p className="text-xs leading-none text-muted-foreground">
+              {`${data?.firstName} ${data?.lastName}`}
+            </p>
+            <p className="text-xs leading-none text-muted-foreground mt-5">
+              {`${data?.email}`}
             </p>
           </div>
         </DropdownMenuLabel>
@@ -79,13 +75,7 @@ export async function UserNav() {
 
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        {/* <DropdownMenuItem onClick={() => signOut()}>
-          Log out
-          <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-        </DropdownMenuItem> */}
-        <DropdownMenuItem>
-          <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-        </DropdownMenuItem>
+        <SignOutButton />
       </DropdownMenuContent>
     </DropdownMenu>
   )

@@ -12,10 +12,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import toast, { Toaster } from 'react-hot-toast';
+import { useRouter } from "next/navigation";
 
 
 const formSchema = z
- .object({
+  .object({
     firstName: z.string(),
     lastName: z.string(),
     emailAddress: z.string().email(),
@@ -31,8 +33,8 @@ const formSchema = z
         message: "Password must contain at least one special character",
       }),
     passwordConfirm: z.string(),
- })
- .refine(
+  })
+  .refine(
     (data) => {
       return data.password === data.passwordConfirm;
     },
@@ -40,9 +42,11 @@ const formSchema = z
       message: "Passwords do not match",
       path: ["passwordConfirm"],
     }
- );
+  );
 
 export default function SignUp() {
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -64,22 +68,29 @@ export default function SignUp() {
       });
 
       if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
+        const errorData = await response.json();
+        toast.error('The email address is already in use.');
 
-      const data = await response.json();
-      console.log(data);
-      // Handle successful sign-up (e.g., redirect to a different page)
+      } else {
+        const data = await response.json();
+        console.log(data);
+        // Handle successful sign-up (e.g., redirect to a different page)
+        toast.success('Sign up successful!');
+        // Add pause to allow toast to display
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        router.push('/');
+      }
     } catch (error) {
       console.error('There was an error!', error);
-      // Handle errors (e.g., show an error message to the user)
+      toast.error('An unexpected error occurred.');
     }
-    console.log({ values });
 
   };
 
   return (
     <main className="flex flex-col items-center justify-between">
+      <Toaster />
+
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleSubmit)}
@@ -160,7 +171,7 @@ export default function SignUp() {
                   <FormLabel>Confirm Password</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Password confirm"
+                      placeholder="Confirm Password"
                       type="password"
                       {...field}
                     />
@@ -170,7 +181,7 @@ export default function SignUp() {
               );
             }}
           />
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full text-white">
             Submit
           </Button>
         </form>
