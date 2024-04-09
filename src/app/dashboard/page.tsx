@@ -31,7 +31,6 @@ import { StudentLoans1, StudentLoans2 } from "./components/studentloan"
 import { UpcomingSubscriptions } from "./components/subscriptions"
 import { SelectDashboard } from "./components/select-dahboard"
 
-import CreditScoreGauge from "./components/creditscore"
 import { Button } from "../../components/ui/button"
 import { DatePickerWithRange } from "./date-picker"
 import { TeslaTicker } from "./components/stock-ticker"

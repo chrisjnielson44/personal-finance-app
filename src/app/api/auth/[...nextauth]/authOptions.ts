@@ -3,7 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { compare } from 'bcrypt';
 import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
-import { NextAuthOptions } from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 
 
 const prisma = new PrismaClient().$extends(withAccelerate())
@@ -73,5 +73,6 @@ export const authOptions: NextAuthOptions = {
 
 }
 
+export default NextAuth(authOptions);
 
 
