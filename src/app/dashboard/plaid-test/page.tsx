@@ -1,4 +1,4 @@
-import PlaidLink from "./linkbutton";
+import PlaidLink from "../components/linkbutton";
 
 export default function PlaidTest() {
   return (

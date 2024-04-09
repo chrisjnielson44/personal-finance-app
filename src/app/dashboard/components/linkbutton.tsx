@@ -42,7 +42,7 @@ export default function PlaidLink() {
   return (
     <div>
       <Button onClick={() => open()} disabled={!ready} className='text-white'>
-        Link Account
+        Link Bank Account
       </Button>
     </div>
 

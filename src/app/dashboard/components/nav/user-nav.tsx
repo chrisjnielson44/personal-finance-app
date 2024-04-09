@@ -19,7 +19,7 @@ import React from "react";
 import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
 import SignOutButton from "../signout";
-import { getUserData } from "@/app/lib/currentuserdata";
+import { getUserData } from "@/app/lib/data";
 
 const prisma = new PrismaClient().$extends(withAccelerate())
 
@@ -42,12 +42,11 @@ export async function UserNav() {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
-          <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none"></p>
-            <p className="text-xs leading-none text-muted-foreground">
+          <div className="flex flex-col space-y-2">
+            <p className="text-md font-semibold leading-none">
               {`${data?.firstName} ${data?.lastName}`}
             </p>
-            <p className="text-xs leading-none text-muted-foreground mt-5">
+            <p className="text-xs leading-none text-muted-foreground">
               {`${data?.email}`}
             </p>
           </div>
@@ -60,11 +59,11 @@ export async function UserNav() {
               <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
             </DropdownMenuItem>
           </Link>
-
+          {/* 
           <DropdownMenuItem>
             Billing
             <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
 
           <Link href={'/dashboard/settings/account'}>
             <DropdownMenuItem>

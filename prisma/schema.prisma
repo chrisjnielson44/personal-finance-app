@@ -9,10 +9,55 @@ datasource db {
 }
 
 model User {
-  id                 Int    @id @default(autoincrement())
-  firstName          String
-  lastName           String
-  email              String @unique
-  password           String
-  plaidExchangeToken String
+  id                  Int              @id @default(autoincrement())
+  firstName           String
+  lastName            String
+  email               String           @unique
+  password            String
+  access_token        String?
+  item_id             String?
+  request_id          String?
+  accounts            AccountBalance[]
+  transactions        Transaction[]
+  lastBalanceUpdate DateTime? @default(now())
+  lastTransactionUpdate DateTime? @default(now())
 }
+
+model AccountBalance {
+  id                 Int      @id @default(autoincrement())
+  userId             Int
+  accountId          String
+  currentBalance     Float   
+  availableBalance   Float?  
+  mask               String?
+  name               String
+  officialName       String?
+  persistentAccountId String?
+  subtype            String
+  type               String
+  user               User     @relation(fields: [userId], references: [id])
+
+  @@unique([accountId, userId])
+}
+
+model Transaction {
+  id                 Int      @id @default(autoincrement())
+  userId             Int
+  accountId          String
+  amount             Float
+  isoCurrencyCode    String?
+  unofficialCurrencyCode String?
+  category           String[]
+  category_id        String
+  date               String
+  name               String
+  paymentChannel     String
+  transactionId      String   @unique
+  transactionType    String
+  user               User     @relation(fields: [userId], references: [id])
+
+  @@unique([transactionId, userId])
+}
+
+
+

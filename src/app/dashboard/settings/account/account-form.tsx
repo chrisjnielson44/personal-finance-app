@@ -6,6 +6,7 @@ import { format } from "date-fns"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
+
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
@@ -32,6 +33,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { toast } from "@/components/ui/use-toast"
+import PlaidLink from "../../components/linkbutton"
 
 const languages = [
   { label: "English", value: "en" },
@@ -91,6 +93,8 @@ export function AccountForm() {
     })
   }
 
+
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -101,8 +105,7 @@ export function AccountForm() {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                {/* <Input placeholder="Your name" {...field} /> */}
-                {/* <p className="text-lg">{session?.user.name}</p> */}
+                {/* {user.name} */}
               </FormControl>
               <FormDescription>
                 This is the name that will be displayed on your profile and in
@@ -219,6 +222,10 @@ export function AccountForm() {
         />
         <Button type="submit">Update account</Button>
       </form>
+      <div className="pt-5">
+      <PlaidLink />
+      </div>
+
     </Form>
   )
 }

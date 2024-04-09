@@ -18,7 +18,7 @@ export function AddWidget() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" size={"icon"}><PlusIcon className="h-4 w-4"/></Button>
+        <Button variant="outline" size={"default"}><p className="pr-2 text-muted-foreground">Add Widget</p> <PlusIcon className="h-4 w-4 text-muted-foreground" /></Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>

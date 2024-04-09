@@ -4,15 +4,14 @@ import bcrypt from 'bcrypt';
 import { NextResponse } from 'next/server';
 
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/lib/authOptions";
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
+
 
 
 const prisma = new PrismaClient().$extends(withAccelerate())
 
 
 export async function POST(request: Request) {
-
-
    const body = await request.json();
    const { firstName, lastName, emailAddress, password } = body;
 
@@ -35,14 +34,21 @@ export async function POST(request: Request) {
          lastName,
          email: emailAddress,
          password: hashedPassword,
-         plaidExchangeToken: '',
+         access_token: null,
+         item_id: null,
+         request_id: null,
       },
    });
 
    return new NextResponse(JSON.stringify({ message: 'User created successfully', user }), { status: 200 });
 }
 
+
 export async function GET(request: Request) {
+   const session = await getServerSession(authOptions);
+   if (!session) {
+      return new NextResponse(JSON.stringify({ error: 'No session found' }), { status: 400 });
+   }
 
    const data = await prisma.user.findMany(
    );

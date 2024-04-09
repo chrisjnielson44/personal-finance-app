@@ -1,23 +1,24 @@
 'use client'
 import Link from "next/link";
-import { MainNav } from "./main-nav";
-import { Search } from "../search";
-import { UserNav } from "./user-nav";
+import { signOut } from "next-auth/react";
+// import { MainNav } from "./main-nav";
+// import { Search } from "../search";
+// import { UserNav } from "./user-nav";
 // import { signOut } from 'next-auth/react'
 
-import Image from "next/image";
+// import Image from "next/image";
 
-import { Fragment } from 'react'
+// import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
+// import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import { Bars3Icon, BellIcon, InboxIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { usePathname, useRouter } from "next/navigation";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+// import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { ModeToggle } from '../DarkModeToggle'
 import { CommandMenu } from "../command-menu";
-import { Notifications } from "../notifications";
-import { Button } from "@/components/ui/button";
-import { Inbox } from "../inbox";
+// import { Notifications } from "../notifications";
+// import { Button } from "@/components/ui/button";
+// import { Inbox } from "../inbox";
 import React from "react";
 
 
@@ -26,7 +27,7 @@ function classNames(...classes: string[]) {
 }
 
 
-export function Nav({ children }: { children: React.ReactNode }) {
+export function Nav({ desktopProfile, mobileNav }: { desktopProfile: React.ReactNode, mobileNav: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -45,7 +46,7 @@ export function Nav({ children }: { children: React.ReactNode }) {
   }, [router]);
 
   return (
-    <Disclosure as="nav" className="bg-white shadow-lg dark:shadow-none dark:bg-background dark:border-b dark:border-zinc-700 sticky top-0 z-50">
+    <Disclosure as="nav" className="bg-white shadow-lg dark:shadow-none dark:bg-background dark:border-b dark:border-zinc-700 md:sticky top-0 z-50">
       {({ open }) => (
         <>
           <div className="mx-auto px-4 ">
@@ -72,7 +73,7 @@ export function Nav({ children }: { children: React.ReactNode }) {
                     <Link href="/dashboard/settings" className={`rounded-md px-3 py-2 text-sm font-medium ${pathname === '/dashboard/settings' ? 'bg-zinc-200 dark:bg-zinc-800 text-black dark:text-white' : 'text-black dark:text-gray-300 hover:bg-zinc-200 dark:hover:bg-zinc-800 dark:hover:text-white'}`}>
                       Settings
                     </Link>
-                
+
                     {/* <button onClick={() => {
                       signOut();
                     }} className='font-semibold text-gray-700 block w-full px-4 py-2 text-left text-sm hover:bg-gray-100 hover:text-gray-800  dark:text-gray-200'>Logout
@@ -108,12 +109,12 @@ export function Nav({ children }: { children: React.ReactNode }) {
                     <span className="absolute -inset-1.5" />
                     <span className="sr-only">View notifications</span>
                   </button> */}
-      
+
                   <ModeToggle />
 
                   {/* Profile dropdown */}
                   <div className="mx-2">
-                    {children}
+                    {desktopProfile}
                   </div>
                 </div>
               </div>
@@ -131,10 +132,16 @@ export function Nav({ children }: { children: React.ReactNode }) {
               </Disclosure.Button>
               <Disclosure.Button
                 as={Link}
-                href="/dashboard/stocks"
+                href="/dashboard/budgeting"
                 className={`block rounded-md px-3 py-2 text-base font-medium  ${pathname === '/dashboard/stocks' ? 'bg-gray-200 dark:bg-zinc-800 ' : 'hover:bg-gray-200 dark:hover:bg-zinc-800 '}`}>
 
-                Stocks
+                Budgeting
+              </Disclosure.Button>
+              <Disclosure.Button
+                as={Link}
+                href="/dashboard/investments"
+                className={`block rounded-md px-3 py-2 text-base font-medium ${pathname === '/dashboard/crypto' ? 'bg-gray-200 dark:bg-zinc-800 ' : ' hover:bg-gray-200 dark:hover:bg-zinc-800'}`}>
+                Investments
               </Disclosure.Button>
               <Disclosure.Button
                 as={Link}
@@ -153,7 +160,7 @@ export function Nav({ children }: { children: React.ReactNode }) {
             </div>
             <div className="border-t border-gray-300 dark:border-gray-700 pb-3 pt-4">
               <div className="flex items-center px-5">
-                <div className="flex-shrink-0">
+                {/* <div className="flex-shrink-0">
                   <Avatar className="h-8 w-8">
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
@@ -161,7 +168,7 @@ export function Nav({ children }: { children: React.ReactNode }) {
                 <div className="ml-3">
                   <div className="text-base font-medium">Jhonny Appleseed</div>
                   <div className="text-sm font-medium text-gray-600 dark:text-gray-300">johnnyappleseed@example.com</div>
-                </div>
+                </div> */}
                 {/* <button
                   type="button"
                   className="relative ml-auto flex-shrink-0 rounded-full  p-1 text-gray-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -170,6 +177,7 @@ export function Nav({ children }: { children: React.ReactNode }) {
                   <span className="sr-only">View notifications</span>
                 </button> */}
 
+                {mobileNav}
 
               </div>
               <div className="mt-3 space-y-1 px-2">
@@ -186,12 +194,9 @@ export function Nav({ children }: { children: React.ReactNode }) {
                   className={`block rounded-md px-3 py-2 text-base font-medium ${pathname === '/dashboard/settings' ? 'bg-gray-200 dark:bg-zinc-800 ' : ' hover:bg-gray-200 dark:hover:bg-zinc-800'}`}>
                   Settings
                 </Disclosure.Button>
-                <Disclosure.Button
-                  as={Link}
-                  href="#"
-                  className="block rounded-md px-3 py-2 text-base font-medium hover:bg-gray-700 hover:text-white"
-                >
-                  Sign out
+                <Disclosure.Button onClick={() => {signOut();}}
+                className={`block w-full text-left rounded-md px-3 py-2 text-base font-medium ${pathname === '/dashboard/settings' ? 'bg-gray-200 dark:bg-zinc-800 ' : ' hover:bg-gray-200 dark:hover:bg-zinc-800'}`}>
+                Sign Out
                 </Disclosure.Button>
               </div>
             </div>
