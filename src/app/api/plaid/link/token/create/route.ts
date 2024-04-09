@@ -4,6 +4,8 @@ import { CountryCode, Products } from 'plaid';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions';
 import { redirect } from 'next/navigation';
+import { Item } from '@radix-ui/react-dropdown-menu';
+import { Link } from 'lucide-react';
 
 
 export async function POST(request: Request) {
@@ -26,3 +28,4 @@ export async function POST(request: Request) {
 
   return NextResponse.json(tokenResponse.data);
 }
+

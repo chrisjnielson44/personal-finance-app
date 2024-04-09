@@ -21,6 +21,7 @@ model User {
   transactions        Transaction[]
   lastBalanceUpdate DateTime? @default(now())
   lastTransactionUpdate DateTime? @default(now())
+  widgetConfigs   WidgetConfig[]
 }
 
 model AccountBalance {
@@ -59,5 +60,16 @@ model Transaction {
   @@unique([transactionId, userId])
 }
 
+model WidgetConfig {
+  id        	Int      @id @default(autoincrement())
+  userId    	Int
+  widgetId  	String
+  isEnabled 	Boolean
+  position  	Int?    
+  settings  	Json?    
+  user      	User     @relation(fields: [userId], references: [id])
+
+  @@unique([userId, widgetId])
+}
 
 

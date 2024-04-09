@@ -29,6 +29,7 @@ export async function POST(request: Request) {
       throw new Error('User not found');
    }
 
+
    const uploadAccessToken = await prisma.user.update({
       where: { id: user.id },
       data: {

@@ -39,7 +39,7 @@ export default async function Balances() {
                 </CardTitle>
                 <LandmarkIcon className="h-4 w-4 fill-currentColor" />
             </CardHeader>
-            <CardDescription className="flex items-center justify-between pl-6">
+            <CardDescription className="text-xs md:text-lg flex items-center justify-between pl-6">
                 {account.name}
             </CardDescription>
             <CardContent className="justify-center pt-5">
