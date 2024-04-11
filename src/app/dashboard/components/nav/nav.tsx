@@ -194,9 +194,9 @@ export function Nav({ desktopProfile, mobileNav }: { desktopProfile: React.React
                   className={`block rounded-md px-3 py-2 text-base font-medium ${pathname === '/dashboard/settings' ? 'bg-gray-200 dark:bg-zinc-800 ' : ' hover:bg-gray-200 dark:hover:bg-zinc-800'}`}>
                   Settings
                 </Disclosure.Button>
-                <Disclosure.Button onClick={() => {signOut();}}
-                className={`block w-full text-left rounded-md px-3 py-2 text-base font-medium ${pathname === '/dashboard/settings' ? 'bg-gray-200 dark:bg-zinc-800 ' : ' hover:bg-gray-200 dark:hover:bg-zinc-800'}`}>
-                Sign Out
+                <Disclosure.Button onClick={() => { signOut(); }}
+                  className={`block w-full text-left rounded-md px-3 py-2 text-base font-medium ${pathname === '/dashboard/settings' ? 'bg-gray-200 dark:bg-zinc-800 ' : ' hover:bg-gray-200 dark:hover:bg-zinc-800'}`}>
+                  Sign Out
                 </Disclosure.Button>
               </div>
             </div>

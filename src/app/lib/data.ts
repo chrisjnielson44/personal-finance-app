@@ -1,10 +1,8 @@
-import { PrismaClient } from '@prisma/client/edge'
-import { withAccelerate } from '@prisma/extension-accelerate';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../api/auth/[...nextauth]/authOptions';
+import { authOptions } from './authOptions';
 import { plaidClient } from './plaid';
+import { prisma } from './prisma';
 
-export const prisma = new PrismaClient().$extends(withAccelerate());
 
 export async function getUserData() {
     const session = await getServerSession(authOptions)

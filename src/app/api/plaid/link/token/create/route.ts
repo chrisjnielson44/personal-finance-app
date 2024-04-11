@@ -2,10 +2,9 @@ import { plaidClient } from '@/app/lib/plaid';
 import { NextResponse } from 'next/server';
 import { CountryCode, Products } from 'plaid';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions';
+import { authOptions } from '@/app/lib/authOptions';
 import { redirect } from 'next/navigation';
-import { Item } from '@radix-ui/react-dropdown-menu';
-import { Link } from 'lucide-react';
+
 
 
 export async function POST(request: Request) {

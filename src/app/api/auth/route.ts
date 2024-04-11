@@ -1,14 +1,10 @@
-import { PrismaClient } from '@prisma/client/edge'
-import { withAccelerate } from '@prisma/extension-accelerate'
+
 import bcrypt from 'bcrypt';
 import { NextResponse } from 'next/server';
-
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
+import { authOptions } from "@/app/lib/authOptions";
+import { prisma } from '@/app/lib/prisma';
 
-
-
-const prisma = new PrismaClient().$extends(withAccelerate())
 
 
 export async function POST(request: Request) {

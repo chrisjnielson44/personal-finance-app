@@ -2,10 +2,7 @@ import NextAuth from "next-auth/next"
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { compare } from 'bcrypt';
-import { PrismaClient } from '@prisma/client/edge'
-import { withAccelerate } from '@prisma/extension-accelerate'
-
-const prisma = new PrismaClient().$extends(withAccelerate())
+import { prisma } from "@/app/lib/prisma";
 
 
 const handler = NextAuth({
@@ -69,6 +66,6 @@ const handler = NextAuth({
             return token;
         },
     },
-  })
-export { handler as GET, handler as POST};
+})
+export { handler as GET, handler as POST };
 
