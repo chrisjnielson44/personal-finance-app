@@ -36,7 +36,7 @@ model AccountBalance {
   persistentAccountId String?
   subtype            String
   type               String
-  user               User     @relation(fields: [userId], references: [id])
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([accountId, userId])
 }
@@ -55,7 +55,7 @@ model Transaction {
   paymentChannel     String
   transactionId      String   @unique
   transactionType    String
-  user               User     @relation(fields: [userId], references: [id])
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([transactionId, userId])
 }
@@ -67,7 +67,7 @@ model WidgetConfig {
   isEnabled 	Boolean
   position  	Int?    
   settings  	Json?    
-  user      	User     @relation(fields: [userId], references: [id])
+  user      	User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, widgetId])
 }

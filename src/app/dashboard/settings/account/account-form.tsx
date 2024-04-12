@@ -5,18 +5,12 @@ import { CalendarIcon, CaretSortIcon, CheckIcon } from "@radix-ui/react-icons"
 import { format } from "date-fns"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
+import { deleteUserData } from "@/app/lib/data"
 
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-} from "@/components/ui/command"
+
 import {
   Form,
   FormControl,
@@ -34,18 +28,7 @@ import {
 } from "@/components/ui/popover"
 import { toast } from "@/components/ui/use-toast"
 import PlaidLink from "../../components/linkbutton"
-
-const languages = [
-  { label: "English", value: "en" },
-  { label: "French", value: "fr" },
-  { label: "German", value: "de" },
-  { label: "Spanish", value: "es" },
-  { label: "Portuguese", value: "pt" },
-  { label: "Russian", value: "ru" },
-  { label: "Japanese", value: "ja" },
-  { label: "Korean", value: "ko" },
-  { label: "Chinese", value: "zh" },
-] as const
+import DeleteUser from "./deleteUser"
 
 
 const accountFormSchema = z.object({
@@ -81,7 +64,6 @@ export function AccountForm() {
 
   // const session = await getServerSession(authOptions);
 
-
   function onSubmit(data: AccountFormValues) {
     toast({
       title: "You submitted the following values:",
@@ -93,8 +75,6 @@ export function AccountForm() {
     })
   }
 
-
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -103,19 +83,16 @@ export function AccountForm() {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>Connected Bank Accounts </FormLabel>
               <FormControl>
                 {/* {user.name} */}
               </FormControl>
-              <FormDescription>
-                This is the name that will be displayed on your profile and in
-                emails.
-              </FormDescription>
+
               <FormMessage />
             </FormItem>
           )}
         />
-        <FormField
+        {/* <FormField
           control={form.control}
           name="dob"
           render={({ field }) => (
@@ -158,8 +135,8 @@ export function AccountForm() {
               <FormMessage />
             </FormItem>
           )}
-        />
-        <FormField
+        /> */}
+        {/* <FormField
           control={form.control}
           name="language"
           render={({ field }) => (
@@ -178,8 +155,8 @@ export function AccountForm() {
                     >
                       {field.value
                         ? languages.find(
-                            (language) => language.value === field.value
-                          )?.label
+                          (language) => language.value === field.value
+                        )?.label
                         : "Select language"}
                       <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>
@@ -219,12 +196,16 @@ export function AccountForm() {
               <FormMessage />
             </FormItem>
           )}
-        />
-        <Button type="submit">Update account</Button>
+        /> */}
+        <Button type="submit" className="text-white">Update account</Button>
       </form>
       <div className="pt-5">
-      <PlaidLink />
+        <PlaidLink />
       </div>
+      <div className="pt-5">
+        <DeleteUser />
+      </div>
+
 
     </Form>
   )

@@ -26,7 +26,7 @@ const CardSkeleton = () => (
     </div>
 );
 
-export default function DashboardLoading(){
+export default function DashboardLoading() {
     return (
         <>
             <FullNav />
@@ -38,7 +38,32 @@ export default function DashboardLoading(){
                         <CardSkeleton />
                         <CardSkeleton />
                         <CardSkeleton />
-                        {/* ... more card skeletons */}
+                        <CardSkeleton />
+                        <CardSkeleton />
+                        <CardSkeleton />
+                    </div>
+                    <div className="grid gap-4 grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
+
+                        <AnimatedSkeleton className="h-8 w-1/2 mb-4" />
+                        <CardSkeleton />
+                        <CardSkeleton />
+                        <CardSkeleton />
+                        <CardSkeleton />
+                        <CardSkeleton />
+                        <CardSkeleton />
+                    </div>
+
+
+                    <div className="grid gap-4 grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
+
+                        <AnimatedSkeleton className="h-8 w-1/2 mb-4" />
+                        <CardSkeleton />
+                        <CardSkeleton />
+                        <CardSkeleton />
+                        <CardSkeleton />
+                        <CardSkeleton />
+                        <CardSkeleton />
+
                     </div>
                     {/* Additional skeletons for other sections */}
                 </div>

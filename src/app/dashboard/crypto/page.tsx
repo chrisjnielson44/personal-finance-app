@@ -72,7 +72,7 @@ export default function Stocks() {
 
                                     <CardContent>
                                         <h1 className="text-xl pb-5 font-medium">Connected Wallets</h1>
-                                        <ConnectedWallets/>
+                                        <ConnectedWallets />
                                         <h1 className="text-xl pt-5 pb-3 font-medium">Total Value</h1>
                                         <div className="pb-2">
                                             <Tabs defaultValue="7d">
@@ -88,10 +88,10 @@ export default function Stocks() {
                                     </CardContent>
                                 </Card>
                             </div>
-                            
+
 
                             <Card className="col-span-2">
-                            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                                     <CardTitle>Trade</CardTitle>
                                     <Input className="w-fit" placeholder="Search Coins..." />
 

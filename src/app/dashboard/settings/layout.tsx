@@ -23,14 +23,14 @@ const sidebarNavItems = [
     title: "Appearance",
     href: "/dashboard/settings/appearance",
   },
-  {
-    title: "Notifications",
-    href: "/dashboard/settings/notifications",
-  },
-  {
-    title: "Display",
-    href: "/dashboard/settings/display",
-  },
+  // {
+  //   title: "Notifications",
+  //   href: "/dashboard/settings/notifications",
+  // },
+  // {
+  //   title: "Display",
+  //   href: "/dashboard/settings/display",
+  // },
 ]
 
 interface SettingsLayoutProps {

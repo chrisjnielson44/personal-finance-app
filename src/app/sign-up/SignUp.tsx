@@ -15,11 +15,14 @@ import { Button } from "@/components/ui/button";
 import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from "next/navigation";
 
-
 const formSchema = z
   .object({
-    firstName: z.string(),
-    lastName: z.string(),
+    firstName: z.string().refine(value => !/\d/.test(value), {
+      message: "First name must not contain numbers",
+    }),
+    lastName: z.string().refine(value => !/\d/.test(value), {
+      message: "Last name must not contain numbers",
+    }),
     emailAddress: z.string().email(),
     password: z.string()
       .min(3)

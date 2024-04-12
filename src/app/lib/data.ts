@@ -13,7 +13,24 @@ export async function getUserData() {
             cacheStrategy: { ttl: 120 },
         }
     );
+
     return data;
+}
+
+// Function to delete user data
+export async function deleteUserData() {
+    const session = await getServerSession(authOptions);
+    const userid = parseInt(session?.user.id);
+    // await prisma.accountBalance.deleteMany({
+    //     where: { id: userid }
+    // });
+    // await prisma.transaction.deleteMany({
+    //     where: { id: userid }
+    // });
+    await prisma.user.delete({
+        where: { id: userid },
+    });
+ 
 }
 
 // Post user balances to the database via Plaid Client

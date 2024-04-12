@@ -15,9 +15,10 @@ export default function SettingsAppearancePage() {
         </CardHeader>
         <CardContent>
           <Separator />
-        <AppearanceForm />
-      </CardContent>
-    </Card>
+          <div className="pt-5" />
+          <AppearanceForm />
+        </CardContent>
+      </Card>
     </div >
   )
 }
